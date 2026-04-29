@@ -17,6 +17,10 @@ type ReadingProgress struct {
 	UpdatedAt  time.Time `json:"updated_at"`
 }
 
+func (ReadingProgress) TableName() string {
+	return "reading_progress"
+}
+
 type SyncProgressRequest struct {
 	ArticleID  uuid.UUID `json:"article_id" binding:"required"`
 	Position   int       `json:"position" binding:"min=0"`
