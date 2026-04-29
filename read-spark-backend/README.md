@@ -4,6 +4,7 @@
 
 - Go 1.24+
 - Docker (for local PostgreSQL)
+- `jq` (recommended for pretty-printing curl JSON output)
 
 ## Quick Start
 
@@ -30,7 +31,56 @@ go run ./cmd/server
 
 Server default address: `http://localhost:8080`
 
-Monitoring endpoint: `GET /metrics` (Prometheus format).
+## Health / Readiness / Metrics
+
+```bash
+# liveness
+curl -s http://localhost:8080/health | jq
+
+# readiness (includes DB ping)
+curl -s http://localhost:8080/ready | jq
+
+# prometheus metrics
+curl -s http://localhost:8080/metrics | head -n 20
+```
+
+## Billing Config (mock vs apple)
+
+`configs/config.yaml`:
+
+```yaml
+billing:
+  receipt_provider: "mock"      # mock | apple
+  apple_environment: "sandbox" # sandbox | production
+  apple_shared_secret: ""       # optional, recommended for production
+  apple_verify_url: ""          # optional override for testing
+```
+
+- `receipt_provider=mock`: always uses mock verifier, suitable for local MVP.
+- `receipt_provider=apple`: calls Apple verify endpoint.
+- If `apple_environment=production` and Apple returns `21007`, server auto-fallbacks to sandbox verify.
+
+## Integration Mode Switch
+
+### Mode A: mock receipt verification (default)
+
+1. Keep config:
+   - `billing.receipt_provider: "mock"`
+2. Restart server.
+3. Use any non-empty `receipt` in subscription API.
+
+### Mode B: Apple receipt verification
+
+1. Update config:
+   - `billing.receipt_provider: "apple"`
+   - `billing.apple_environment: "sandbox"` (or `production`)
+   - `billing.apple_shared_secret: "<your-secret>"` (optional but recommended)
+2. Restart server.
+3. Call subscription API with a real Apple receipt.
+4. Error mapping behavior:
+   - invalid/malformed receipt -> `400 INVALID_RECEIPT`
+   - Apple upstream/network failure -> `502 RECEIPT_UPSTREAM_ERROR`
+   - internal unexpected error -> `500 INTERNAL_ERROR`
 
 ## API Verification (curl)
 
@@ -66,7 +116,8 @@ curl -s -X POST "$BASE_URL/progress" \
 curl -s "$BASE_URL/progress" \
   -H "Authorization: Bearer $ACCESS_TOKEN" | jq
 
-# 7) Create subscription (protected, mock receipt validation)
+# 7) Create subscription (protected)
+# Mock mode: any non-empty receipt is enough
 curl -s -X POST "$BASE_URL/subscriptions" \
   -H "Authorization: Bearer $ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
@@ -101,5 +152,5 @@ curl -s -X POST "$BASE_URL/push/token" \
 - Current MVP uses PostgreSQL full-text search for article search.
 - SMS verification code is configurable via `auth.verification_code` (default `123456`).
 - Receipt verification is abstracted behind `ReceiptVerifier`; set `billing.receipt_provider` to `mock` or `apple`.
-- Apple verifier supports `billing.apple_environment` (`sandbox`/`production`), optional `billing.apple_shared_secret`, and optional `billing.apple_verify_url` override.
-- Real SMS verification and real receipt verification are not integrated in MVP.
+- Apple verifier supports auto sandbox fallback for `21007` when running in production mode.
+- Real SMS verification and production-grade billing reconciliation are not fully integrated in MVP.
