@@ -61,12 +61,14 @@ func main() {
 	articleService := service.NewArticleService(articleRepo, searcher)
 	progressService := service.NewProgressService(progressRepo)
 	subscriptionService := service.NewSubscriptionService(subscriptionRepo)
+	dictionaryService := service.NewDictionaryService()
 
 	// Handlers
 	authHandler := handler.NewAuthHandler(authService)
 	articleHandler := handler.NewArticleHandler(articleService)
 	progressHandler := handler.NewProgressHandler(progressService)
 	subscriptionHandler := handler.NewSubscriptionHandler(subscriptionService)
+	dictionaryHandler := handler.NewDictionaryHandler(dictionaryService)
 
 	// Routes
 	api := r.Group("/api/v1")
@@ -81,6 +83,7 @@ func main() {
 
 		api.GET("/articles/daily", articleHandler.GetDaily)
 		api.GET("/articles", articleHandler.ListArticles)
+		api.GET("/dictionary/:word", dictionaryHandler.Lookup)
 
 		// Protected
 		authenticated := api.Group("/")
