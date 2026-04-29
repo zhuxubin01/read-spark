@@ -9,6 +9,7 @@ import (
 	"github.com/readspark/backend/internal/database"
 	"github.com/readspark/backend/internal/domain"
 	"github.com/readspark/backend/internal/handler"
+	"github.com/readspark/backend/internal/middleware"
 	"github.com/readspark/backend/internal/repository"
 	"github.com/readspark/backend/internal/service"
 )
@@ -50,21 +51,36 @@ func main() {
 
 	// Repositories
 	userRepo := repository.NewUserRepository(db)
+	articleRepo := repository.NewArticleRepository(db)
 
 	// Services
 	authService := service.NewAuthService(userRepo, cfg.JWT)
+	searcher := service.NewPGFullTextSearch(articleRepo)
+	articleService := service.NewArticleService(articleRepo, searcher)
 
 	// Handlers
 	authHandler := handler.NewAuthHandler(authService)
+	articleHandler := handler.NewArticleHandler(articleService)
 
 	// Routes
 	api := r.Group("/api/v1")
 	{
+		// Public
 		auth := api.Group("/auth")
 		{
 			auth.POST("/register", authHandler.Register)
 			auth.POST("/login", authHandler.Login)
 			auth.POST("/refresh", authHandler.Refresh)
+		}
+
+		api.GET("/articles/daily", articleHandler.GetDaily)
+		api.GET("/articles", articleHandler.ListArticles)
+
+		// Protected
+		authenticated := api.Group("/")
+		authenticated.Use(middleware.JWTAuth(cfg.JWT.Secret))
+		{
+			authenticated.GET("/articles/:id", articleHandler.GetArticle)
 		}
 	}
 
