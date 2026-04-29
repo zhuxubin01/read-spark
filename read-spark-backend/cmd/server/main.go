@@ -43,6 +43,7 @@ func main() {
 	articleRepo := repository.NewArticleRepository(db)
 	progressRepo := repository.NewProgressRepository(db)
 	subscriptionRepo := repository.NewSubscriptionRepository(db)
+	annotationRepo := repository.NewAnnotationRepository(db)
 
 	// Services
 	authService := service.NewAuthService(userRepo, cfg.JWT)
@@ -51,6 +52,8 @@ func main() {
 	progressService := service.NewProgressService(progressRepo)
 	subscriptionService := service.NewSubscriptionService(subscriptionRepo)
 	dictionaryService := service.NewDictionaryService()
+	annotationService := service.NewAnnotationService(annotationRepo)
+	pushService := service.NewPushService()
 
 	// Handlers
 	authHandler := handler.NewAuthHandler(authService)
@@ -58,6 +61,8 @@ func main() {
 	progressHandler := handler.NewProgressHandler(progressService)
 	subscriptionHandler := handler.NewSubscriptionHandler(subscriptionService)
 	dictionaryHandler := handler.NewDictionaryHandler(dictionaryService)
+	annotationHandler := handler.NewAnnotationHandler(annotationService)
+	pushHandler := handler.NewPushHandler(pushService)
 
 	// Routes
 	api := r.Group("/api/v1")
@@ -83,6 +88,9 @@ func main() {
 			authenticated.GET("/progress", progressHandler.List)
 			authenticated.POST("/subscriptions", subscriptionHandler.Create)
 			authenticated.GET("/subscriptions/status", subscriptionHandler.Status)
+			authenticated.POST("/annotations", annotationHandler.Create)
+			authenticated.GET("/annotations", annotationHandler.List)
+			authenticated.POST("/push/token", pushHandler.RegisterToken)
 		}
 	}
 

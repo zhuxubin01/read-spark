@@ -21,7 +21,7 @@ type Annotation struct {
 type CreateAnnotationRequest struct {
 	ArticleID  uuid.UUID `json:"article_id" binding:"required"`
 	Type       string    `json:"type" binding:"required,oneof=highlight note vocabulary"`
-	RangeStart int       `json:"range_start" binding:"required,min=0"`
-	RangeEnd   int       `json:"range_end" binding:"required,min=0"`
+	RangeStart int       `json:"range_start" binding:"min=0"`
+	RangeEnd   int       `json:"range_end" binding:"min=0"`
 	Content    *string   `json:"content,omitempty"`
 }
