@@ -25,3 +25,6 @@ auth:
 
 billing:
   receipt_provider: "mock"
+  apple_environment: "sandbox"
+  apple_shared_secret: ""
+  apple_verify_url: ""

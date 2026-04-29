@@ -57,5 +57,8 @@ type AuthConfig struct {
 }
 
 type BillingConfig struct {
-	ReceiptProvider string `mapstructure:"receipt_provider"`
+	ReceiptProvider   string `mapstructure:"receipt_provider"`
+	AppleEnvironment  string `mapstructure:"apple_environment"`
+	AppleSharedSecret string `mapstructure:"apple_shared_secret"`
+	AppleVerifyURL    string `mapstructure:"apple_verify_url"`
 }

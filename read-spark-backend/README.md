@@ -100,5 +100,6 @@ curl -s -X POST "$BASE_URL/push/token" \
 
 - Current MVP uses PostgreSQL full-text search for article search.
 - SMS verification code is configurable via `auth.verification_code` (default `123456`).
-- Receipt verification is abstracted behind `ReceiptVerifier` and currently uses mock provider by default (`billing.receipt_provider: mock`).
+- Receipt verification is abstracted behind `ReceiptVerifier`; set `billing.receipt_provider` to `mock` or `apple`.
+- Apple verifier supports `billing.apple_environment` (`sandbox`/`production`), optional `billing.apple_shared_secret`, and optional `billing.apple_verify_url` override.
 - Real SMS verification and real receipt verification are not integrated in MVP.
