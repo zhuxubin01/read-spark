@@ -8,6 +8,9 @@ import (
 	"github.com/readspark/backend/internal/config"
 	"github.com/readspark/backend/internal/database"
 	"github.com/readspark/backend/internal/domain"
+	"github.com/readspark/backend/internal/handler"
+	"github.com/readspark/backend/internal/repository"
+	"github.com/readspark/backend/internal/service"
 )
 
 func main() {
@@ -44,6 +47,26 @@ func main() {
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok"})
 	})
+
+	// Repositories
+	userRepo := repository.NewUserRepository(db)
+
+	// Services
+	authService := service.NewAuthService(userRepo, cfg.JWT)
+
+	// Handlers
+	authHandler := handler.NewAuthHandler(authService)
+
+	// Routes
+	api := r.Group("/api/v1")
+	{
+		auth := api.Group("/auth")
+		{
+			auth.POST("/register", authHandler.Register)
+			auth.POST("/login", authHandler.Login)
+			auth.POST("/refresh", authHandler.Refresh)
+		}
+	}
 
 	slog.Info("server starting", "port", cfg.Server.Port)
 	if err := r.Run(":" + cfg.Server.Port); err != nil {
