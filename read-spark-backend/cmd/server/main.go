@@ -6,6 +6,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/readspark/backend/internal/config"
+	"github.com/readspark/backend/internal/database"
+	"github.com/readspark/backend/internal/domain"
 )
 
 func main() {
@@ -14,6 +16,23 @@ func main() {
 	cfg, err := config.Load("configs/config.yaml")
 	if err != nil {
 		slog.Error("failed to load config", "error", err)
+		os.Exit(1)
+	}
+
+	db, err := database.New(cfg.Database)
+	if err != nil {
+		slog.Error("failed to connect database", "error", err)
+		os.Exit(1)
+	}
+
+	if err := db.AutoMigrate(
+		&domain.User{},
+		&domain.Article{},
+		&domain.Subscription{},
+		&domain.ReadingProgress{},
+		&domain.Annotation{},
+	); err != nil {
+		slog.Error("failed to migrate", "error", err)
 		os.Exit(1)
 	}
 
