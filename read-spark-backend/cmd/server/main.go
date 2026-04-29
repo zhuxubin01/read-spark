@@ -53,17 +53,20 @@ func main() {
 	userRepo := repository.NewUserRepository(db)
 	articleRepo := repository.NewArticleRepository(db)
 	progressRepo := repository.NewProgressRepository(db)
+	subscriptionRepo := repository.NewSubscriptionRepository(db)
 
 	// Services
 	authService := service.NewAuthService(userRepo, cfg.JWT)
 	searcher := service.NewPGFullTextSearch(articleRepo)
 	articleService := service.NewArticleService(articleRepo, searcher)
 	progressService := service.NewProgressService(progressRepo)
+	subscriptionService := service.NewSubscriptionService(subscriptionRepo)
 
 	// Handlers
 	authHandler := handler.NewAuthHandler(authService)
 	articleHandler := handler.NewArticleHandler(articleService)
 	progressHandler := handler.NewProgressHandler(progressService)
+	subscriptionHandler := handler.NewSubscriptionHandler(subscriptionService)
 
 	// Routes
 	api := r.Group("/api/v1")
@@ -86,6 +89,8 @@ func main() {
 			authenticated.GET("/articles/:id", articleHandler.GetArticle)
 			authenticated.POST("/progress", progressHandler.Sync)
 			authenticated.GET("/progress", progressHandler.List)
+			authenticated.POST("/subscriptions", subscriptionHandler.Create)
+			authenticated.GET("/subscriptions/status", subscriptionHandler.Status)
 		}
 	}
 
