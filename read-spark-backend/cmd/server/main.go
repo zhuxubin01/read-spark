@@ -1,8 +1,11 @@
 package main
 
 import (
+	"context"
 	"log/slog"
+	"net/http"
 	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -30,13 +33,29 @@ func main() {
 		os.Exit(1)
 	}
 
+	sqlDB, err := db.DB()
+	if err != nil {
+		slog.Error("failed to get sql db handle", "error", err)
+		os.Exit(1)
+	}
+
 	if cfg.Server.Mode == "release" {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
 	r := gin.Default()
+	r.Use(middleware.RequestLog())
 	r.GET("/health", func(c *gin.Context) {
-		c.JSON(200, gin.H{"status": "ok"})
+		c.JSON(http.StatusOK, gin.H{"status": "ok"})
+	})
+	r.GET("/ready", func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(c.Request.Context(), 2*time.Second)
+		defer cancel()
+		if err := sqlDB.PingContext(ctx); err != nil {
+			c.JSON(http.StatusServiceUnavailable, gin.H{"status": "not_ready", "reason": "database_unreachable"})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{"status": "ready"})
 	})
 	r.GET("/metrics", gin.WrapH(promhttp.Handler()))
 
