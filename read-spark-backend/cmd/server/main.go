@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/readspark/backend/internal/config"
 	"github.com/readspark/backend/internal/database"
 	"github.com/readspark/backend/internal/handler"
@@ -37,25 +38,23 @@ func main() {
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok"})
 	})
+	r.GET("/metrics", gin.WrapH(promhttp.Handler()))
 
-	// Repositories
 	userRepo := repository.NewUserRepository(db)
 	articleRepo := repository.NewArticleRepository(db)
 	progressRepo := repository.NewProgressRepository(db)
 	subscriptionRepo := repository.NewSubscriptionRepository(db)
 	annotationRepo := repository.NewAnnotationRepository(db)
 
-	// Services
-	authService := service.NewAuthService(userRepo, cfg.JWT)
+	authService := service.NewAuthService(userRepo, cfg.JWT, cfg.Auth)
 	searcher := service.NewPGFullTextSearch(articleRepo)
 	articleService := service.NewArticleService(articleRepo, searcher)
 	progressService := service.NewProgressService(progressRepo)
-	subscriptionService := service.NewSubscriptionService(subscriptionRepo)
+	subscriptionService := service.NewSubscriptionService(subscriptionRepo, &service.MockReceiptVerifier{})
 	dictionaryService := service.NewDictionaryService()
 	annotationService := service.NewAnnotationService(annotationRepo)
 	pushService := service.NewPushService()
 
-	// Handlers
 	authHandler := handler.NewAuthHandler(authService)
 	articleHandler := handler.NewArticleHandler(articleService)
 	progressHandler := handler.NewProgressHandler(progressService)
@@ -64,10 +63,8 @@ func main() {
 	annotationHandler := handler.NewAnnotationHandler(annotationService)
 	pushHandler := handler.NewPushHandler(pushService)
 
-	// Routes
 	api := r.Group("/api/v1")
 	{
-		// Public
 		auth := api.Group("/auth")
 		{
 			auth.POST("/register", authHandler.Register)
@@ -79,7 +76,6 @@ func main() {
 		api.GET("/articles", articleHandler.ListArticles)
 		api.GET("/dictionary/:word", dictionaryHandler.Lookup)
 
-		// Protected
 		authenticated := api.Group("/")
 		authenticated.Use(middleware.JWTAuth(cfg.JWT.Secret))
 		{

@@ -9,6 +9,8 @@ type Config struct {
 	Database DatabaseConfig
 	Redis    RedisConfig
 	JWT      JWTConfig
+	Auth     AuthConfig
+	Billing  BillingConfig
 }
 
 type ServerConfig struct {
@@ -48,4 +50,12 @@ func Load(path string) (*Config, error) {
 		return nil, err
 	}
 	return &cfg, nil
+}
+
+type AuthConfig struct {
+	VerificationCode string `mapstructure:"verification_code"`
+}
+
+type BillingConfig struct {
+	ReceiptProvider string `mapstructure:"receipt_provider"`
 }

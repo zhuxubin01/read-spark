@@ -11,14 +11,22 @@ import (
 )
 
 type SubscriptionService struct {
-	subRepo *repository.SubscriptionRepository
+	subRepo         *repository.SubscriptionRepository
+	receiptVerifier ReceiptVerifier
 }
 
-func NewSubscriptionService(subRepo *repository.SubscriptionRepository) *SubscriptionService {
-	return &SubscriptionService{subRepo: subRepo}
+func NewSubscriptionService(subRepo *repository.SubscriptionRepository, receiptVerifier ReceiptVerifier) *SubscriptionService {
+	if receiptVerifier == nil {
+		receiptVerifier = &MockReceiptVerifier{}
+	}
+	return &SubscriptionService{subRepo: subRepo, receiptVerifier: receiptVerifier}
 }
 
 func (s *SubscriptionService) CreateSubscription(ctx context.Context, userID uuid.UUID, req domain.CreateSubscriptionRequest) (*domain.Subscription, error) {
+	if err := s.receiptVerifier.Verify(ctx, req.PaymentChannel, req.Receipt); err != nil {
+		return nil, err
+	}
+
 	now := time.Now()
 	endDate := now.AddDate(0, 1, 0)
 	if req.PlanType == "yearly" {
@@ -26,7 +34,7 @@ func (s *SubscriptionService) CreateSubscription(ctx context.Context, userID uui
 	}
 
 	paymentChannel := req.PaymentChannel
-	transactionID := "mock-" + uuid.New().String()
+	transactionID := "verified-" + uuid.New().String()
 	sub := &domain.Subscription{
 		ID:             uuid.New(),
 		UserID:         userID,

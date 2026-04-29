@@ -11,7 +11,8 @@ import (
 )
 
 type DictionaryService struct {
-	client *http.Client
+	client  *http.Client
+	baseURL string
 }
 
 type DictionaryResult struct {
@@ -21,9 +22,17 @@ type DictionaryResult struct {
 }
 
 func NewDictionaryService() *DictionaryService {
-	return &DictionaryService{
-		client: &http.Client{Timeout: 8 * time.Second},
+	return NewDictionaryServiceWithClient("https://api.dictionaryapi.dev", &http.Client{Timeout: 8 * time.Second})
+}
+
+func NewDictionaryServiceWithClient(baseURL string, client *http.Client) *DictionaryService {
+	if strings.TrimSpace(baseURL) == "" {
+		baseURL = "https://api.dictionaryapi.dev"
 	}
+	if client == nil {
+		client = &http.Client{Timeout: 8 * time.Second}
+	}
+	return &DictionaryService{client: client, baseURL: strings.TrimRight(baseURL, "/")}
 }
 
 func (s *DictionaryService) Lookup(ctx context.Context, word string) (*DictionaryResult, error) {
@@ -32,7 +41,7 @@ func (s *DictionaryService) Lookup(ctx context.Context, word string) (*Dictionar
 		return nil, fmt.Errorf("word is required")
 	}
 
-	endpoint := "https://api.dictionaryapi.dev/api/v2/entries/en/" + url.PathEscape(w)
+	endpoint := s.baseURL + "/api/v2/entries/en/" + url.PathEscape(w)
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, endpoint, nil)
 	if err != nil {
 		return nil, err
@@ -70,9 +79,7 @@ func (s *DictionaryService) Lookup(ctx context.Context, word string) (*Dictionar
 		return nil, fmt.Errorf("word not found")
 	}
 
-	result := &DictionaryResult{
-		Word: entries[0].Word,
-	}
+	result := &DictionaryResult{Word: entries[0].Word}
 	if entries[0].Phonetic != "" {
 		result.Phonetic = entries[0].Phonetic
 	} else {

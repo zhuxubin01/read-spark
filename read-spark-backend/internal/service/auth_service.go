@@ -14,20 +14,27 @@ import (
 )
 
 type AuthService struct {
-	userRepo *repository.UserRepository
-	jwtCfg   config.JWTConfig
+	userRepo         *repository.UserRepository
+	jwtCfg           config.JWTConfig
+	verificationCode string
 }
 
-func NewAuthService(userRepo *repository.UserRepository, jwtCfg config.JWTConfig) *AuthService {
+func NewAuthService(userRepo *repository.UserRepository, jwtCfg config.JWTConfig, authCfg config.AuthConfig) *AuthService {
+	code := authCfg.VerificationCode
+	if code == "" {
+		code = "123456"
+	}
 	return &AuthService{
-		userRepo: userRepo,
-		jwtCfg:   jwtCfg,
+		userRepo:         userRepo,
+		jwtCfg:           jwtCfg,
+		verificationCode: code,
 	}
 }
 
-// In MVP, verification code is always "123456" for testing
 func (s *AuthService) VerifyCode(ctx context.Context, phone, code string) error {
-	if code != "123456" {
+	_ = ctx
+	_ = phone
+	if code != s.verificationCode {
 		return domain.ErrInvalidCode
 	}
 	return nil
@@ -62,7 +69,6 @@ func (s *AuthService) Login(ctx context.Context, req domain.UserLoginRequest) (*
 	user, err := s.userRepo.FindByPhone(ctx, req.Phone)
 	if err != nil {
 		if err == domain.ErrUserNotFound {
-			// Auto-register if not exists
 			return s.Register(ctx, domain.UserRegisterRequest(req))
 		}
 		return nil, err
@@ -132,7 +138,6 @@ func (s *AuthService) RefreshTokens(ctx context.Context, refreshToken string) (*
 		return nil, domain.ErrInvalidToken
 	}
 
-	// Verify user still exists
 	if _, err := s.userRepo.FindByID(ctx, userID); err != nil {
 		return nil, err
 	}

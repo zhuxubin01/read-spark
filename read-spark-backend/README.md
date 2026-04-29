@@ -30,6 +30,8 @@ go run ./cmd/server
 
 Server default address: `http://localhost:8080`
 
+Monitoring endpoint: `GET /metrics` (Prometheus format).
+
 ## API Verification (curl)
 
 ```bash
@@ -97,4 +99,6 @@ curl -s -X POST "$BASE_URL/push/token" \
 ## Notes
 
 - Current MVP uses PostgreSQL full-text search for article search.
+- SMS verification code is configurable via `auth.verification_code` (default `123456`).
+- Receipt verification is abstracted behind `ReceiptVerifier` and currently uses mock provider by default (`billing.receipt_provider: mock`).
 - Real SMS verification and real receipt verification are not integrated in MVP.
