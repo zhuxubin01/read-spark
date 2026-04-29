@@ -76,6 +76,22 @@ curl -s "$BASE_URL/subscriptions/status" \
 
 # 9) Dictionary lookup (public)
 curl -s "$BASE_URL/dictionary/hello" | jq
+
+# 10) Create annotation (protected)
+curl -s -X POST "$BASE_URL/annotations" \
+  -H "Authorization: Bearer $ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{\"article_id\":\"$ARTICLE_ID\",\"type\":\"highlight\",\"range_start\":1,\"range_end\":12}" | jq
+
+# 11) List annotations (protected)
+curl -s "$BASE_URL/annotations?article_id=$ARTICLE_ID" \
+  -H "Authorization: Bearer $ACCESS_TOKEN" | jq
+
+# 12) Register push token (protected, MVP mock persistence)
+curl -s -X POST "$BASE_URL/push/token" \
+  -H "Authorization: Bearer $ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"device_token":"dev-token-001","platform":"ios"}' | jq
 ```
 
 ## Notes
