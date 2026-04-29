@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -33,6 +34,14 @@ func (h *SubscriptionHandler) Create(c *gin.Context) {
 
 	sub, err := h.subscriptionService.CreateSubscription(c.Request.Context(), userID.(uuid.UUID), req)
 	if err != nil {
+		if errors.Is(err, service.ErrReceiptRequired) || errors.Is(err, service.ErrReceiptInvalid) {
+			c.JSON(http.StatusBadRequest, gin.H{"code": "INVALID_RECEIPT", "message": err.Error()})
+			return
+		}
+		if errors.Is(err, service.ErrReceiptUpstream) {
+			c.JSON(http.StatusBadGateway, gin.H{"code": "RECEIPT_UPSTREAM_ERROR", "message": err.Error()})
+			return
+		}
 		c.JSON(http.StatusInternalServerError, gin.H{"code": "INTERNAL_ERROR", "message": err.Error()})
 		return
 	}
