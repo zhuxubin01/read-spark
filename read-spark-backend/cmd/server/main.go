@@ -11,6 +11,7 @@ import (
 	"github.com/readspark/backend/internal/handler"
 	"github.com/readspark/backend/internal/middleware"
 	"github.com/readspark/backend/internal/repository"
+	"github.com/readspark/backend/internal/scheduler"
 	"github.com/readspark/backend/internal/service"
 )
 
@@ -96,6 +97,14 @@ func main() {
 			authenticated.GET("/subscriptions/status", subscriptionHandler.Status)
 		}
 	}
+
+	jobScheduler, err := scheduler.New()
+	if err != nil {
+		slog.Error("failed to initialize scheduler", "error", err)
+		os.Exit(1)
+	}
+	jobScheduler.Start()
+	defer jobScheduler.Stop()
 
 	slog.Info("server starting", "port", cfg.Server.Port)
 	if err := r.Run(":" + cfg.Server.Port); err != nil {
