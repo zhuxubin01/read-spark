@@ -1,10 +1,14 @@
 package main
 
 import (
+	"context"
 	"log/slog"
+	"net/http"
 	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/readspark/backend/internal/config"
 	"github.com/readspark/backend/internal/database"
 	"github.com/readspark/backend/internal/handler"
@@ -29,33 +33,48 @@ func main() {
 		os.Exit(1)
 	}
 
+	sqlDB, err := db.DB()
+	if err != nil {
+		slog.Error("failed to get sql db handle", "error", err)
+		os.Exit(1)
+	}
+
 	if cfg.Server.Mode == "release" {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
 	r := gin.Default()
+	r.Use(middleware.RequestLog())
 	r.GET("/health", func(c *gin.Context) {
-		c.JSON(200, gin.H{"status": "ok"})
+		c.JSON(http.StatusOK, gin.H{"status": "ok"})
 	})
+	r.GET("/ready", func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(c.Request.Context(), 2*time.Second)
+		defer cancel()
+		if err := sqlDB.PingContext(ctx); err != nil {
+			c.JSON(http.StatusServiceUnavailable, gin.H{"status": "not_ready", "reason": "database_unreachable"})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{"status": "ready"})
+	})
+	r.GET("/metrics", gin.WrapH(promhttp.Handler()))
 
-	// Repositories
 	userRepo := repository.NewUserRepository(db)
 	articleRepo := repository.NewArticleRepository(db)
 	progressRepo := repository.NewProgressRepository(db)
 	subscriptionRepo := repository.NewSubscriptionRepository(db)
 	annotationRepo := repository.NewAnnotationRepository(db)
 
-	// Services
-	authService := service.NewAuthService(userRepo, cfg.JWT)
+	authService := service.NewAuthService(userRepo, cfg.JWT, cfg.Auth)
 	searcher := service.NewPGFullTextSearch(articleRepo)
 	articleService := service.NewArticleService(articleRepo, searcher)
 	progressService := service.NewProgressService(progressRepo)
-	subscriptionService := service.NewSubscriptionService(subscriptionRepo)
+	receiptVerifier := service.NewReceiptVerifier(cfg.Billing)
+	subscriptionService := service.NewSubscriptionService(subscriptionRepo, receiptVerifier)
 	dictionaryService := service.NewDictionaryService()
 	annotationService := service.NewAnnotationService(annotationRepo)
 	pushService := service.NewPushService()
 
-	// Handlers
 	authHandler := handler.NewAuthHandler(authService)
 	articleHandler := handler.NewArticleHandler(articleService)
 	progressHandler := handler.NewProgressHandler(progressService)
@@ -64,10 +83,8 @@ func main() {
 	annotationHandler := handler.NewAnnotationHandler(annotationService)
 	pushHandler := handler.NewPushHandler(pushService)
 
-	// Routes
 	api := r.Group("/api/v1")
 	{
-		// Public
 		auth := api.Group("/auth")
 		{
 			auth.POST("/register", authHandler.Register)
@@ -79,7 +96,6 @@ func main() {
 		api.GET("/articles", articleHandler.ListArticles)
 		api.GET("/dictionary/:word", dictionaryHandler.Lookup)
 
-		// Protected
 		authenticated := api.Group("/")
 		authenticated.Use(middleware.JWTAuth(cfg.JWT.Secret))
 		{

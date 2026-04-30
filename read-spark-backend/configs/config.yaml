@@ -19,3 +19,12 @@ jwt:
   secret: "readspark-dev-secret-change-in-production"
   access_ttl: 15m
   refresh_ttl: 168h
+
+auth:
+  verification_code: "123456"
+
+billing:
+  receipt_provider: "mock"
+  apple_environment: "sandbox"
+  apple_shared_secret: ""
+  apple_verify_url: ""
