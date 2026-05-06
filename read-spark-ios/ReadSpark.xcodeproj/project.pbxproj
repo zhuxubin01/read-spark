@@ -1,0 +1,386 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0585FCE55FECC82A4D1C2847 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65704F245A1B49D83EA965E1 /* KeychainManager.swift */; };
+		1F6871847D3C4893D72B8CA9 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD9B3FF6989D41BCE7602A1 /* Article.swift */; };
+		599848952B2629E6DD31E1D9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A4DA09E82BC0BF515C0032 /* User.swift */; };
+		6D25377BE71282A49F9C146B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13828D7E6441D663458CD9FC /* LoginView.swift */; };
+		734467E8EE0AFCA2AFC220EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75605BC971C137EC4753C772 /* ContentView.swift */; };
+		A3E8386D041E5C13B4C18CEE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2045194E71FD6B38A5F1D70B /* CoreDataStack.swift */; };
+		BD5751B43AC528BA8E5BD323 /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04F7C86EC2921D9108AFD7 /* AppTabView.swift */; };
+		D24A73CBF97B1107AEE9D3C6 /* ReadSparkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92B0B8CF86BC4F458742618 /* ReadSparkApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		13828D7E6441D663458CD9FC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		2045194E71FD6B38A5F1D70B /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		5D5811110911284A88BDEC4A /* ReadSpark.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ReadSpark.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		65704F245A1B49D83EA965E1 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		75605BC971C137EC4753C772 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		928C4566B2DF2442C48BF0C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CE04F7C86EC2921D9108AFD7 /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
+		D8A4DA09E82BC0BF515C0032 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F92B0B8CF86BC4F458742618 /* ReadSparkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadSparkApp.swift; sourceTree = "<group>"; };
+		FDD9B3FF6989D41BCE7602A1 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0A2BD96DEC7330CF605B114E /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7B1364C3B43D4CF0E276C8DE /* Navigation */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		0CABD5A1C792EA4DDAA2242E /* ReadSpark */ = {
+			isa = PBXGroup;
+			children = (
+				75605BC971C137EC4753C772 /* ContentView.swift */,
+				928C4566B2DF2442C48BF0C2 /* Info.plist */,
+				F92B0B8CF86BC4F458742618 /* ReadSparkApp.swift */,
+				4CEC6AF88491BD73FE87B64F /* Core */,
+				CE374AFF044DFA3676B3E1BB /* Features */,
+				0A2BD96DEC7330CF605B114E /* UI */,
+			);
+			path = ReadSpark;
+			sourceTree = "<group>";
+		};
+		1C0638A0B287CB5AED77EE00 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5D5811110911284A88BDEC4A /* ReadSpark.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1F17870708FD574AEE510AEE /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				2045194E71FD6B38A5F1D70B /* CoreDataStack.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		260911653C72073C9060F4FD /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				65704F245A1B49D83EA965E1 /* KeychainManager.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2878E22EB9B5A6E71B310D04 = {
+			isa = PBXGroup;
+			children = (
+				0CABD5A1C792EA4DDAA2242E /* ReadSpark */,
+				1C0638A0B287CB5AED77EE00 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4CEC6AF88491BD73FE87B64F /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C6C5E407EAF0B9854E0B4A5E /* Models */,
+				1F17870708FD574AEE510AEE /* Persistence */,
+				260911653C72073C9060F4FD /* Utils */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		506081BDD143D5866702D674 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				13828D7E6441D663458CD9FC /* LoginView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		7B1364C3B43D4CF0E276C8DE /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				CE04F7C86EC2921D9108AFD7 /* AppTabView.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		C6C5E407EAF0B9854E0B4A5E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FDD9B3FF6989D41BCE7602A1 /* Article.swift */,
+				D8A4DA09E82BC0BF515C0032 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CE374AFF044DFA3676B3E1BB /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				506081BDD143D5866702D674 /* Auth */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1003233136F4D958B4F648A6 /* ReadSpark */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06C24313CC67B0FB8ECF87A5 /* Build configuration list for PBXNativeTarget "ReadSpark" */;
+			buildPhases = (
+				1A2C90FA65F1177B402DDB6B /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReadSpark;
+			packageProductDependencies = (
+			);
+			productName = ReadSpark;
+			productReference = 5D5811110911284A88BDEC4A /* ReadSpark.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1DCDC323CFB3E7AFAB92746E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = F8741DB483F94BFC0C67D07C /* Build configuration list for PBXProject "ReadSpark" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 2878E22EB9B5A6E71B310D04;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1C0638A0B287CB5AED77EE00 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1003233136F4D958B4F648A6 /* ReadSpark */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1A2C90FA65F1177B402DDB6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD5751B43AC528BA8E5BD323 /* AppTabView.swift in Sources */,
+				1F6871847D3C4893D72B8CA9 /* Article.swift in Sources */,
+				734467E8EE0AFCA2AFC220EE /* ContentView.swift in Sources */,
+				A3E8386D041E5C13B4C18CEE /* CoreDataStack.swift in Sources */,
+				0585FCE55FECC82A4D1C2847 /* KeychainManager.swift in Sources */,
+				6D25377BE71282A49F9C146B /* LoginView.swift in Sources */,
+				D24A73CBF97B1107AEE9D3C6 /* ReadSparkApp.swift in Sources */,
+				599848952B2629E6DD31E1D9 /* User.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A402137B978903DFCC20DB21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		CE7FF147ABF71D6317BF46AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ReadSpark/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.readspark.app;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D40F466432EA175E2BB90905 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		E2BC303F5825F88804713D13 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ReadSpark/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.readspark.app;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		06C24313CC67B0FB8ECF87A5 /* Build configuration list for PBXNativeTarget "ReadSpark" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE7FF147ABF71D6317BF46AA /* Debug */,
+				E2BC303F5825F88804713D13 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F8741DB483F94BFC0C67D07C /* Build configuration list for PBXProject "ReadSpark" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D40F466432EA175E2BB90905 /* Debug */,
+				A402137B978903DFCC20DB21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1DCDC323CFB3E7AFAB92746E /* Project object */;
+}

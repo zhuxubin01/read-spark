@@ -1,0 +1,24 @@
+name: ReadSpark
+options:
+  minimumXcodeGenVersion: 2.38.0
+targets:
+  ReadSpark:
+    type: application
+    platform: iOS
+    supportedDestinations:
+      - iOS
+      - iOSSimulator
+    deploymentTarget: "16.0"
+    sources:
+      - ReadSpark
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.readspark.app
+      INFOPLIST_FILE: ReadSpark/Info.plist
+      SWIFT_VERSION: 5.9
+      TARGETED_DEVICE_FAMILY: "1,2"
+      GENERATE_INFOPLIST_FILE: NO
+schemes:
+  ReadSpark:
+    build:
+      targets:
+        ReadSpark: all
