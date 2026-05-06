@@ -27,6 +27,7 @@
 		D77CE81956B1352B36022996 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2EBA2B0AD5734FE5606D3C /* DiscoverView.swift */; };
 		DE654B11D5B444C59891EAB1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3046444A496FABE3B2031AE0 /* HomeViewModel.swift */; };
 		E6873CB2F033F0858CD02B56 /* ProgressRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C058204C1B5F32D9FE61F /* ProgressRepository.swift */; };
+		E85EF3A9708855CA7F01865A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89FFC81C1AA1CC9C09B624C /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		75605BC971C137EC4753C772 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		760C058204C1B5F32D9FE61F /* ProgressRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRepository.swift; sourceTree = "<group>"; };
 		928C4566B2DF2442C48BF0C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A89FFC81C1AA1CC9C09B624C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		CE04F7C86EC2921D9108AFD7 /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
 		CF2EBA2B0AD5734FE5606D3C /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
 		D8A4DA09E82BC0BF515C0032 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				13828D7E6441D663458CD9FC /* LoginView.swift */,
+				A89FFC81C1AA1CC9C09B624C /* LoginViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				DE654B11D5B444C59891EAB1 /* HomeViewModel.swift in Sources */,
 				0585FCE55FECC82A4D1C2847 /* KeychainManager.swift in Sources */,
 				6D25377BE71282A49F9C146B /* LoginView.swift in Sources */,
+				E85EF3A9708855CA7F01865A /* LoginViewModel.swift in Sources */,
 				1060274A4426131F9DF7A014 /* ProfileView.swift in Sources */,
 				E6873CB2F033F0858CD02B56 /* ProgressRepository.swift in Sources */,
 				D24A73CBF97B1107AEE9D3C6 /* ReadSparkApp.swift in Sources */,
