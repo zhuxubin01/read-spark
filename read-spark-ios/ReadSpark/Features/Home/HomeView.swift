@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
+    @State private var selectedArticle: ArticleSummary?
 
     var body: some View {
         NavigationView {
@@ -18,13 +19,18 @@ struct HomeView: View {
 
                 ForEach(viewModel.articles) { article in
                     ArticleCard(article: article) {
-                        // Task 7 will wire reader navigation.
+                        selectedArticle = article
                     }
                     .listRowSeparator(.hidden)
                 }
             }
             .listStyle(.plain)
             .navigationTitle("ReadSpark")
+            .sheet(item: $selectedArticle) { article in
+                NavigationView {
+                    ReaderView(articleId: article.id)
+                }
+            }
         }
     }
 }
