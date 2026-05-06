@@ -17,8 +17,24 @@ targets:
       SWIFT_VERSION: 5.9
       TARGETED_DEVICE_FAMILY: "1,2"
       GENERATE_INFOPLIST_FILE: NO
+  ReadSparkTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - ReadSparkTests
+    dependencies:
+      - target: ReadSpark
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.readspark.app.tests
+      SWIFT_VERSION: 5.9
+      GENERATE_INFOPLIST_FILE: YES
 schemes:
   ReadSpark:
     build:
       targets:
         ReadSpark: all
+        ReadSparkTests: all
+    test:
+      targets:
+        - ReadSparkTests

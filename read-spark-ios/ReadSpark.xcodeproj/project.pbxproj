@@ -21,6 +21,7 @@
 		92B61CF2D24F0A86D8088670 /* ArticleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D497BBE24F15C23FC054E1 /* ArticleEntity.swift */; };
 		A3E8386D041E5C13B4C18CEE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2045194E71FD6B38A5F1D70B /* CoreDataStack.swift */; };
 		A4A39A13726A4A79474CAF97 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC47C137D29DEF9E0D6B7D9 /* APIClient.swift */; };
+		ACBA677AA6FB54973C5D833E /* ModelDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA957BE49BE2FB30333846B1 /* ModelDecodingTests.swift */; };
 		BD14314E716FADC567CEFB19 /* ReaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA3E199CDA782C339B4F7A4 /* ReaderViewModel.swift */; };
 		BD5751B43AC528BA8E5BD323 /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04F7C86EC2921D9108AFD7 /* AppTabView.swift */; };
 		C004CBC91582C42AAC096948 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9316E737D3FCE3B3CCC972 /* CategoryView.swift */; };
@@ -33,11 +34,22 @@
 		E85EF3A9708855CA7F01865A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89FFC81C1AA1CC9C09B624C /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8FB38E49FC0E18F3BDC296E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1DCDC323CFB3E7AFAB92746E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1003233136F4D958B4F648A6;
+			remoteInfo = ReadSpark;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0F9316E737D3FCE3B3CCC972 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		13828D7E6441D663458CD9FC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2045194E71FD6B38A5F1D70B /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		223F1F7DC24D92771CB98DBF /* ArticleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleRepository.swift; sourceTree = "<group>"; };
+		2885432593CF3A70DD180FE3 /* ReadSparkTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ReadSparkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA3E199CDA782C339B4F7A4 /* ReaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderViewModel.swift; sourceTree = "<group>"; };
 		2F8AD6265C7EFEB1F854315E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3046444A496FABE3B2031AE0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -55,6 +67,7 @@
 		CE04F7C86EC2921D9108AFD7 /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
 		CF2EBA2B0AD5734FE5606D3C /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
 		D8A4DA09E82BC0BF515C0032 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DA957BE49BE2FB30333846B1 /* ModelDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDecodingTests.swift; sourceTree = "<group>"; };
 		DAA1D6FB60CE5AFE71991E14 /* ArticleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCard.swift; sourceTree = "<group>"; };
 		E5D497BBE24F15C23FC054E1 /* ArticleEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleEntity.swift; sourceTree = "<group>"; };
 		E7DA5B75D684A001DE247FED /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -107,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				5D5811110911284A88BDEC4A /* ReadSpark.app */,
+				2885432593CF3A70DD180FE3 /* ReadSparkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,8 +146,17 @@
 			isa = PBXGroup;
 			children = (
 				0CABD5A1C792EA4DDAA2242E /* ReadSpark */,
+				3BC2F61551D6165C59853EE9 /* ReadSparkTests */,
 				1C0638A0B287CB5AED77EE00 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		3BC2F61551D6165C59853EE9 /* ReadSparkTests */ = {
+			isa = PBXGroup;
+			children = (
+				DA957BE49BE2FB30333846B1 /* ModelDecodingTests.swift */,
+			);
+			path = ReadSparkTests;
 			sourceTree = "<group>";
 		};
 		4C54AD55F79FE60440BB27AF /* Profile */ = {
@@ -259,6 +282,24 @@
 			productReference = 5D5811110911284A88BDEC4A /* ReadSpark.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E5916A977C55E0F104C910CC /* ReadSparkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC0A891632613F41EE8203C8 /* Build configuration list for PBXNativeTarget "ReadSparkTests" */;
+			buildPhases = (
+				39AD0958611073C806EBAC83 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				113BD99FB44A21DC88CCFA24 /* PBXTargetDependency */,
+			);
+			name = ReadSparkTests;
+			packageProductDependencies = (
+			);
+			productName = ReadSparkTests;
+			productReference = 2885432593CF3A70DD180FE3 /* ReadSparkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -285,6 +326,7 @@
 			projectRoot = "";
 			targets = (
 				1003233136F4D958B4F648A6 /* ReadSpark */,
+				E5916A977C55E0F104C910CC /* ReadSparkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -321,9 +363,63 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		39AD0958611073C806EBAC83 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACBA677AA6FB54973C5D833E /* ModelDecodingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		113BD99FB44A21DC88CCFA24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1003233136F4D958B4F648A6 /* ReadSpark */;
+			targetProxy = 8FB38E49FC0E18F3BDC296E8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		43120F5C21F9732BE2E17498 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.readspark.app.tests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReadSpark.app/ReadSpark";
+			};
+			name = Release;
+		};
+		74974444D5C24077E87B5066 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.readspark.app.tests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReadSpark.app/ReadSpark";
+			};
+			name = Debug;
+		};
 		A402137B978903DFCC20DB21 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -495,6 +591,15 @@
 			buildConfigurations = (
 				CE7FF147ABF71D6317BF46AA /* Debug */,
 				E2BC303F5825F88804713D13 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EC0A891632613F41EE8203C8 /* Build configuration list for PBXNativeTarget "ReadSparkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74974444D5C24077E87B5066 /* Debug */,
+				43120F5C21F9732BE2E17498 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
