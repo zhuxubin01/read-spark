@@ -21,6 +21,20 @@
                ReferencedContainer = "container:ReadSpark.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E5916A977C55E0F104C910CC"
+               BuildableName = "ReadSparkTests.xctest"
+               BlueprintName = "ReadSparkTests"
+               ReferencedContainer = "container:ReadSpark.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -39,7 +53,20 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E5916A977C55E0F104C910CC"
+               BuildableName = "ReadSparkTests.xctest"
+               BlueprintName = "ReadSparkTests"
+               ReferencedContainer = "container:ReadSpark.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
