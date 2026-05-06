@@ -1,6 +1,12 @@
 import Combine
 import Foundation
 
+protocol APIServiceProtocol {
+    func login(phone: String, code: String) -> AnyPublisher<TokenPair, APIError>
+    func register(phone: String, code: String) -> AnyPublisher<TokenPair, APIError>
+    func syncProgress(articleId: UUID, position: Int, percentage: Double) -> AnyPublisher<[String: String], APIError>
+}
+
 final class APIService {
     static let shared = APIService()
     private let client = APIClient.shared
@@ -94,6 +100,8 @@ final class APIService {
         return client.request("/progress", method: "POST", body: body)
     }
 }
+
+extension APIService: APIServiceProtocol {}
 
 struct DailyArticlesResponse: Codable {
     let articles: [ArticleSummary]

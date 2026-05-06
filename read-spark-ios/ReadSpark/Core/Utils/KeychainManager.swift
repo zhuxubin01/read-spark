@@ -1,6 +1,12 @@
 import Foundation
 import Security
 
+protocol TokenStore: AnyObject {
+    var accessToken: String? { get set }
+    var refreshToken: String? { get set }
+    func clearTokens()
+}
+
 final class KeychainManager {
     static let shared = KeychainManager()
 
@@ -60,3 +66,5 @@ final class KeychainManager {
         set(key: "refreshToken", value: nil)
     }
 }
+
+extension KeychainManager: TokenStore {}
