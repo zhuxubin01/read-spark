@@ -8,10 +8,22 @@ final class CoreDataStack {
     private init() {
         container = NSPersistentContainer(name: "ReadSpark")
         container.loadPersistentStores { _, error in
-            if let error {
-                assertionFailure("Core Data failed to load: \(error)")
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+
+    func save() {
+        let context = container.viewContext
+        guard context.hasChanges else { return }
+
+        do {
+            try context.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
     }
 }
